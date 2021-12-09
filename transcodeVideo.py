@@ -30,10 +30,10 @@ for idx, x in enumerate(files):
 
     clip = core.ffms2.Source(source=str(source))
     clip = core.std.SetFrameProp(clip, prop="_Matrix", intval=6)
-    clip = core.resize.Bicubic(clip, format=vs.YUV420P8, matrix_s="709")
+    clip = core.resize.Bicubic(clip, format=vs.YUV420P8, matrix_s="709") # reformat clip
     clip = haf.QTGMC(clip, Preset='Medium', Sharpness=0.75, EZDenoise=5, NoisePreset="Slow", ChromaNoise=True, TFF=False)
     #clip = core.text.FrameProps(clip)
-    clip = adj.Tweak(clip, sat=1.25)
+    clip = adj.Tweak(clip, sat=1.25) # bump some saturation
     clip = core.resize.Bicubic(clip, 1280, 960)
 
     v1 = ffmpeg.input('pipe:', thread_queue_size=1024)
@@ -41,5 +41,5 @@ for idx, x in enumerate(files):
     out = ffmpeg.output(v1, a1, dest, vcodec='h264_nvenc', preset='p7', tune='hq', rc='vbr', cq=19, pix_fmt='yuv420p').overwrite_output()
     process = out.run_async(pipe_stdin=True)
 
-    clip.output(process.stdin, y4m = True)
+    clip.output(process.stdin, y4m = True)  # should y4m be True?
     process.communicate()
