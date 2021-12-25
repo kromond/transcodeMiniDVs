@@ -15,3 +15,8 @@ I stared with ffmpeg, but found lots of people on the internet pointing to [QTGM
 I used a conda environment for collecing all my bits.  The script above is using [ffmpeg-python](https://github.com/kkroening/ffmpeg-python) to get the encoding done right in the script, which I thought would be better then the 'vspipe.exe' which was widely referenced as the method to run VapourSynth scripts using the commandline.  I wanted to stay in python because I could find all my files and I was pretty certain there would be some way to pipe into ffmpeg right in the script.  For some reason,I didn't find any examples of this to reference, I didn't see anyone doing this.  I found [this post](https://forum.videohelp.com/threads/392480-Easy-way-to-encode-vpy-scripts#post2544851) which had the clues I needed to know it was possible and [this issue/example here](https://github.com/kkroening/ffmpeg-python/issues/301) is what got me there in the end.  I am glad I went this route, as I'm sure this pipe-to-ffmpeg-python will be something I use again.  Additionally, I could mux the original audio on to the resulting file in the process
 
 This script above includes all the settings I used to encode my movie files.  I'm no expert so there may be better options for better visuals or faster encoding, but this is what I was happy with.  I encoded with NVEnc and was seeing 28fps encoding typically.  My process ran for a few days.  If I were to do it again, I'd put in some logging.  I hope this is helpful for someone
+
+Addendum
+
+I found this project https://github.com/m-ab-s/media-autobuild_suite and used it to build ffmpeg with AAC codec.  This should also allow for a build that can process vapoursynth scripts.  This could be an easier way, if I were to do it again
+
